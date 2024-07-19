@@ -31,10 +31,10 @@
   "homepage": "https://git.sr.ht/~omasanori/tree-sitter-hare",
   "devDependencies": {
     "tree-sitter-cli": "^0.22.6",
-    "prebuildify": "^6.0.0"
+    "prebuildify": "^6.0.1"
   },
   "dependencies": {
-    "node-gyp-build": "^4.8.0"
+    "node-gyp-build": "^4.8.1"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0"
