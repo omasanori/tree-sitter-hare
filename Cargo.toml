@@ -1,3 +1,6 @@
+# Copyright 2024 Masanori Ogino
+# SPDX-License-Identifier: MIT
+
 [package]
 name = "tree-sitter-hare"
 description = "Hare grammar for tree-sitter"

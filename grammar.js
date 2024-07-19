@@ -1,3 +1,6 @@
+// Copyright 2024 Masanori Ogino
+// SPDX-License-Identifier: MIT
+
 module.exports = grammar({
   name: 'hare',
 

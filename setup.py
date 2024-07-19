@@ -1,3 +1,6 @@
+# Copyright 2024 Masanori Ogino
+# SPDX-License-Identifier: MIT
+
 from os.path import isdir, join
 from platform import system
 

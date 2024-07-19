@@ -1,4 +1,7 @@
-VERSION := 0.0.1
+# Copyright 2024 Masanori Ogino
+# SPDX-License-Identifier: MIT
+
+VERSION := 0.1.0
 
 LANGUAGE_NAME := tree-sitter-hare
 

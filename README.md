@@ -15,3 +15,8 @@
 [matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
 [hare]: https://harelang.org/
 [tree-sitter]: https://github.com/tree-sitter/tree-sitter
+
+<!--
+  -- Copyright 2024 Masanori Ogino
+  -- SPDX-License-Identifier: MIT
+  -->

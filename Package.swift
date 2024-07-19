@@ -1,3 +1,6 @@
+// Copyright 2024 Masanori Ogino
+// SPDX-License-Identifier: MIT
+
 // swift-tools-version:5.3
 import PackageDescription
 
