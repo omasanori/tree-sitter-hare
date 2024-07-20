@@ -11,16 +11,28 @@ module.exports = grammar({
     source_file: $ => repeat($._sub_unit),
 
     _sub_unit: $ => seq(
-      $.import
+      $._imports
       // TODO: Implement declarations
     ),
 
+    _imports: $ => seq($.import),
+
     import: $ => choice(
-      seq('use', $.identifier, ';')
-      // TODO: Implement other variants
+      seq('use', $.identifier, ';'),
+      seq('use', $.name, '=', $.identifier, ';'),
+      seq('use', $.identifier, '::', '{', $.member_list, '}', ';'),
+      seq('use', $.identifier, '::', '*', ';')
     ),
 
-    // identifier: $ => choice($.name, seq($.name, '::', $.identifier))
+    member_list: $ => $._member_list,
+
+    _member_list: $ => choice(
+      $.name,
+      seq($.name, ','),
+      seq($.name, ',', $._member_list)
+    ),
+
+    // identifier: $ => choice($.name, repeat(seq($.name, '::', $.identifier)))
     identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*(?:::[a-zA-Z_][0-9a-zA-Z_]*)*/,
 
     name: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
