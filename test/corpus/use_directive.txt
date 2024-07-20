@@ -30,20 +30,6 @@ Use directive with alias
 ========================
 
 use foo = bar;
-
----
-
-(source_file
-  (use_directive
-    (use_alias
-      (name)
-      (identifier
-        (name)))))
-
-======================================
-Use directive with alias and namespace
-======================================
-
 use foo = bar::baz;
 
 ---
@@ -53,5 +39,60 @@ use foo = bar::baz;
     (use_alias
       (name)
       (identifier
+        (name))))
+  (use_directive
+    (use_alias
+      (name)
+      (identifier
         (name)
         (name)))))
+
+=======================
+Use directive with list
+=======================
+
+use foo::{a};
+use foo::{a,};
+use foo::{a,b};
+use foo::{a,b,};
+
+---
+
+(source_file
+  (use_directive
+    (use_list
+      (name)
+      (name)))
+  (use_directive
+    (use_list
+      (name)
+      (name)))
+  (use_directive
+    (use_list
+      (name)
+      (name)
+      (name)))
+  (use_directive
+    (use_list
+      (name)
+      (name)
+      (name))))
+
+===========================
+Use directive with wildcard
+:skip
+===========================
+
+use foo::*;
+use foo::bar::*;
+
+---
+
+(source_file
+  (use_directive
+    (use_wildcard
+      (name)))
+  (use_directive
+    (use_wildcard
+      (name)
+      (name))))

@@ -85,9 +85,79 @@
         {
           "type": "use_alias",
           "named": true
+        },
+        {
+          "type": "use_list",
+          "named": true
+        },
+        {
+          "type": "use_wildcard",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "use_list",
+    "named": true,
+    "fields": {
+      "members": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      },
+      "path": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "::",
+            "named": false
+          },
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "use_wildcard",
+    "named": true,
+    "fields": {
+      "path": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "::",
+            "named": false
+          },
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
   },
   {
     "type": "::",
@@ -107,6 +177,14 @@
   },
   {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
     "named": false
   }
 ]

@@ -27,7 +27,8 @@ module.exports = grammar({
     _use_clause: $ => choice(
       $.identifier,
       $.use_alias,
-      // TODO: Implement other variants
+      $.use_list,
+      $.use_wildcard,
     ),
 
     use_alias: $ => seq(
@@ -36,10 +37,28 @@ module.exports = grammar({
       field('path', $.identifier),
     ),
 
+    use_list: $ => seq(
+      field('path', $._path),
+      '{',
+      field('members', optionalCommaSep1($.name)),
+      '}',
+    ),
+
+    use_wildcard: $ => seq(
+      field('path', $._path),
+      '*',
+    ),
+
     identifier: $ => seq(
-      field('path', optional(repeat(seq($.name, '::')))),
+      field('path', optional($._path)),
       field('name', $.name),
     ),
+
+    _path: $ => prec.left(seq(
+      $.name,
+      optional(repeat(seq('::', $.name))),
+      '::',
+    )),
 
     name: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
   }
