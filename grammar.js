@@ -17,22 +17,28 @@ module.exports = grammar({
 
     _imports: $ => seq($.use_directive),
 
-    use_directive: $ => choice(
-      seq('use', $.identifier, ';'),
-      seq('use', $.name, '=', $.identifier, ';'), // FIXME
-      seq('use', $.identifier, '::', '{', $.member_list, '}', ';'),
-      seq('use', $.identifier, '::', '*', ';')
+    use_directive: $ => seq(
+      'use',
+      $._use_clause,
+      ';',
     ),
 
-    member_list: $ => $._member_list,
-
-    _member_list: $ => choice(
-      $.name,
-      seq($.name, ','),
-      seq($.name, ',', $._member_list)
+    _use_clause: $ => choice(
+      $.identifier,
+      $.use_alias,
+      // TODO: Implement other variants
     ),
 
-    identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*(?:::[a-zA-Z_][0-9a-zA-Z_]*)*/,
+    use_alias: $ => seq(
+      field('alias', $.name),
+      '=',
+      field('path', $.identifier),
+    ),
+
+    identifier: $ => seq(
+      field('path', optional(repeat(seq($.name, '::')))),
+      field('name', $.name),
+    ),
 
     name: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
   }

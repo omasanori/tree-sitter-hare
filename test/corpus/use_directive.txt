@@ -8,7 +8,8 @@ use foo;
 
 (source_file
   (use_directive
-    (identifier)))
+    (identifier
+      (name))))
 
 ============================
 Use directive with namespace
@@ -20,4 +21,37 @@ use foo::bar;
 
 (source_file
   (use_directive
-    (identifier)))
+    (identifier
+      (name)
+      (name))))
+
+========================
+Use directive with alias
+========================
+
+use foo = bar;
+
+---
+
+(source_file
+  (use_directive
+    (use_alias
+      (name)
+      (identifier
+        (name)))))
+
+======================================
+Use directive with alias and namespace
+======================================
+
+use foo = bar::baz;
+
+---
+
+(source_file
+  (use_directive
+    (use_alias
+      (name)
+      (identifier
+        (name)
+        (name)))))
