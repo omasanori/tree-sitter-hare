@@ -1,0 +1,23 @@
+====================
+Simple use directive
+====================
+
+use foo;
+
+---
+
+(source_file
+  (use_directive
+    (identifier)))
+
+============================
+Use directive with namespace
+============================
+
+use foo::bar;
+
+---
+
+(source_file
+  (use_directive
+    (identifier)))
