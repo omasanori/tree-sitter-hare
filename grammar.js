@@ -19,7 +19,7 @@ module.exports = grammar({
 
     use_directive: $ => choice(
       seq('use', $.identifier, ';'),
-      seq('use', $.name, '=', $.identifier, ';'),
+      seq('use', $.name, '=', $.identifier, ';'), // FIXME
       seq('use', $.identifier, '::', '{', $.member_list, '}', ';'),
       seq('use', $.identifier, '::', '*', ';')
     ),
