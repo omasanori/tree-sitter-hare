@@ -5,9 +5,13 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "generate": "tree-sitter generate",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prebuildify": "prebuildify --napi --strip",
+    "build": "tree-sitter generate --no-bindings",
+    "build-wasm": "tree-sitter build --wasm",
+    "lint": "eslint grammar.js",
+    "parse": "tree-sitter parse",
+    "test": "tree-sitter test"
   },
   "repository": {
     "type": "git",
@@ -30,8 +34,10 @@
   "license": "MIT",
   "homepage": "https://git.sr.ht/~omasanori/tree-sitter-hare",
   "devDependencies": {
-    "tree-sitter-cli": "^0.22.6",
-    "prebuildify": "^6.0.1"
+    "eslint": "^9.7.0",
+    "eslint-config-google": "^0.14.0",
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.22.6"
   },
   "dependencies": {
     "node-gyp-build": "^4.8.1"
