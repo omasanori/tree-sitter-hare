@@ -15,9 +15,9 @@ module.exports = grammar({
       // TODO: Implement declarations
     ),
 
-    _imports: $ => seq($.import),
+    _imports: $ => seq($.use_directive),
 
-    import: $ => choice(
+    use_directive: $ => choice(
       seq('use', $.identifier, ';'),
       seq('use', $.name, '=', $.identifier, ';'),
       seq('use', $.identifier, '::', '{', $.member_list, '}', ';'),

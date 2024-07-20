@@ -1,28 +1,5 @@
 [
   {
-    "type": "import",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "member_list",
-          "named": true
-        },
-        {
-          "type": "name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "member_list",
     "named": true,
     "fields": {},
@@ -46,7 +23,30 @@
       "required": false,
       "types": [
         {
-          "type": "import",
+          "type": "use_directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "use_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "member_list",
+          "named": true
+        },
+        {
+          "type": "name",
           "named": true
         }
       ]

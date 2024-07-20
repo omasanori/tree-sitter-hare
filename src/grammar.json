@@ -22,11 +22,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "import"
+          "name": "use_directive"
         }
       ]
     },
-    "import": {
+    "use_directive": {
       "type": "CHOICE",
       "members": [
         {
