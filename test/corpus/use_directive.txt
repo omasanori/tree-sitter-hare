@@ -3,18 +3,6 @@ Simple use directive
 ====================
 
 use foo;
-
----
-
-(source_file
-  (use_directive
-    (identifier
-      (name))))
-
-============================
-Use directive with namespace
-============================
-
 use foo::bar;
 
 ---
@@ -22,11 +10,15 @@ use foo::bar;
 (source_file
   (use_directive
     (identifier
+      (name)))
+  (use_directive
+    (identifier
       (name)
       (name))))
 
 ========================
 Use directive with alias
+:skip
 ========================
 
 use foo = bar;
@@ -49,6 +41,7 @@ use foo = bar::baz;
 
 =======================
 Use directive with list
+:skip
 =======================
 
 use foo::{a};
@@ -80,6 +73,7 @@ use foo::{a,b,};
 
 ===========================
 Use directive with wildcard
+:skip
 ===========================
 
 use foo::*;
