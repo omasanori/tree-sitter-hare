@@ -32,7 +32,6 @@ module.exports = grammar({
       seq($.name, ',', $._member_list)
     ),
 
-    // identifier: $ => choice($.name, repeat(seq($.name, '::', $.identifier)))
     identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*(?:::[a-zA-Z_][0-9a-zA-Z_]*)*/,
 
     name: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
