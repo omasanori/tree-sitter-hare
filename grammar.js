@@ -21,14 +21,13 @@ module.exports = grammar({
     use_directive: $ => seq(
       'use',
       $._use_clause,
-      ';',
     ),
 
     _use_clause: $ => choice(
-      $.identifier,
-      $.use_alias,
-      $.use_list,
-      $.use_wildcard,
+      seq($.identifier, ';'),
+      seq($.use_alias, ';'),
+      seq($.use_list, ';'),
+      seq($.use_wildcard, ';'),
     ),
 
     use_alias: $ => seq(
@@ -38,27 +37,20 @@ module.exports = grammar({
     ),
 
     use_list: $ => seq(
-      field('path', $._path),
+      field('path', $.identifier),
+      '::',
       '{',
       field('members', optionalCommaSep1($.name)),
       '}',
     ),
 
     use_wildcard: $ => seq(
-      field('path', $._path),
+      field('path', $.identifier),
+      '::',
       '*',
     ),
 
-    identifier: $ => seq(
-      field('path', optional($._path)),
-      field('name', $.name),
-    ),
-
-    _path: $ => prec.left(seq(
-      $.name,
-      optional(repeat(seq('::', $.name))),
-      '::',
-    )),
+    identifier: $ => seq($.name, optional(seq('::', $.name))),
 
     name: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
   }

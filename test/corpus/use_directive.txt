@@ -80,7 +80,6 @@ use foo::{a,b,};
 
 ===========================
 Use directive with wildcard
-:skip
 ===========================
 
 use foo::*;
