@@ -9,16 +9,12 @@ use foo::bar;
 
 (source_file
   (use_directive
-    (identifier
-      (name)))
+    (identifier))
   (use_directive
-    (identifier
-      (name)
-      (name))))
+    (identifier)))
 
 ========================
 Use directive with alias
-:skip
 ========================
 
 use foo = bar;
@@ -29,51 +25,68 @@ use foo = bar::baz;
 (source_file
   (use_directive
     (use_alias
-      (name)
-      (identifier
-        (name))))
+      (identifier)
+      (identifier)))
   (use_directive
     (use_alias
-      (name)
-      (identifier
-        (name)
-        (name)))))
+      (identifier)
+      (identifier))))
 
 =======================
 Use directive with list
-:skip
 =======================
 
 use foo::{a};
 use foo::{a,};
 use foo::{a,b};
 use foo::{a,b,};
+use foo::bar::{a};
+use foo::bar::{a,};
+use foo::bar::{a,b};
+use foo::bar::{a,b,};
 
 ---
 
 (source_file
   (use_directive
     (use_list
+      (identifier)
+      (name)))
+  (use_directive
+    (use_list
+      (identifier)
+      (name)))
+  (use_directive
+    (use_list
+      (identifier)
       (name)
       (name)))
   (use_directive
     (use_list
+      (identifier)
       (name)
       (name)))
   (use_directive
     (use_list
-      (name)
+      (identifier)
+      (name)))
+  (use_directive
+    (use_list
+      (identifier)
+      (name)))
+  (use_directive
+    (use_list
+      (identifier)
       (name)
       (name)))
   (use_directive
     (use_list
-      (name)
+      (identifier)
       (name)
       (name))))
 
 ===========================
 Use directive with wildcard
-:skip
 ===========================
 
 use foo::*;
@@ -84,8 +97,7 @@ use foo::bar::*;
 (source_file
   (use_directive
     (use_wildcard
-      (name)))
+      (identifier)))
   (use_directive
     (use_wildcard
-      (name)
-      (name))))
+      (identifier))))
