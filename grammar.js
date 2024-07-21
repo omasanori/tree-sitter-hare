@@ -32,11 +32,9 @@ module.exports = grammar({
     source_file: $ => sepo($._import_or_declaration, ';'),
 
     _import_or_declaration: $ => choice(
-      // §6.13 Units
-      $.use_directive,
-      // §6.12 Declarations
-      $._declaration,
-      // $.static_assertion_expression,
+      $.use_directive,               // §6.13 Units
+      $._declaration,                // §6.12 Declarations
+      // $.static_assertion_expression, // §6.7.21 Assertions
     ),
 
     // §6.5 Identifiers
@@ -55,7 +53,7 @@ module.exports = grammar({
 
     _storage_class: $ => choice(
       $._primitive_type,
-      // $.pointer_type,
+      $.pointer_type,
       // $.struct_union_type,
       // $.tuple_type,
       // $.tagged_union_type,
@@ -90,6 +88,8 @@ module.exports = grammar({
       'void',
     ),
 
+    pointer_type: $ => seq(optional('nullable'), '*', $.type),
+
     // §6.7 Expressions
 
     _expression: $ => choice(
@@ -101,7 +101,23 @@ module.exports = grammar({
     ),
 
     expression: $ => choice(
-      '1' // FIXME
+      $.literal,
+      // and others
+    ),
+
+    literal: $ => choice(
+      // $.integer_literal,
+      // $.floating_literal,
+      // $.rune_literal,
+      // $.string_literal,
+      // $.array_literal,
+      // $.struct_literal,
+      // $.tuple_literal,
+      'true',
+      'false',
+      'null',
+      'void',
+      'done',
     ),
 
     // §6.12 Declarations
@@ -137,7 +153,7 @@ module.exports = grammar({
       'use',
       choice(
         $.identifier,
-        // XXX: In the spec, it is seq($.name, '=', $.identifier). The rule
+        // BUG: In the spec, it is seq($.name, '=', $.identifier). The rule
         //      below accepts `use foo::bar = baz;` but it is harmless to us.
         seq($.identifier, '=', $.identifier),
         seq($.identifier, '::', '{', sep1o($.name, ','), '}'),
