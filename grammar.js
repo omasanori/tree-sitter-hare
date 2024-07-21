@@ -29,12 +29,61 @@ module.exports = grammar({
     // fn g(...): ... = ...;
     // ```
 
-    source_file: $ => sepo($._sub_unit, ';'),
+    source_file: $ => sepo($._import_or_declaration, ';'),
 
-    _sub_unit: $ => choice(
+    _import_or_declaration: $ => choice(
+      // §6.13 Units
       $.use_directive,
-      // $.declaration,
+      // §6.12 Declarations
+      seq(optional('export'), $.declaration),
+      // $.static_assertion_expression,
     ),
+
+    // §6.5 Identifiers
+
+    identifier: $ => token(sep1(name, '::')),
+
+    name: $ => name,
+
+    // §6.7 Expressions
+
+    _expression: $ => choice(
+      // $.assignment,
+      $.expression,
+      // $.if_expression,
+      // $.for_loop,
+      // $.control_expression,
+    ),
+
+    expression: $ => choice(
+      '1' // FIXME
+    ),
+
+    // §6.12 Declarations
+
+    declaration: $ => choice(
+      $.global_declaration,
+      // $.constant_declaration,
+      // $.type_declaration,
+      // $.function_declaration,
+    ),
+
+    global_declaration: $ => seq(
+      choice('let', 'const'),
+      sep1o($.global_binding, ','),
+    ),
+
+    global_binding: $ => seq(
+      // optional($.decl_attr),
+      optional('@threadlocal'),
+      choice(
+        // seq($.identifier, ':', $.type),
+        // seq($.identifier, ':', $.type, '=', $.expression),
+        seq($.identifier, '=', $._expression),
+      ),
+    ),
+
+    // §6.13 Units
 
     use_directive: $ => seq(
       'use',
@@ -47,9 +96,5 @@ module.exports = grammar({
         seq($.identifier, '::', '*'),
       ),
     ),
-
-    identifier: $ => token(sep1(name, '::')),
-
-    name: $ => name,
   }
 });
