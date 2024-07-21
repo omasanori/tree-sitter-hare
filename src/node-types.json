@@ -1,20 +1,5 @@
 [
   {
-    "type": "declaration",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "global_declaration",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "expression",
     "named": true,
     "fields": {}
@@ -33,6 +18,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -62,7 +51,7 @@
       "required": false,
       "types": [
         {
-          "type": "declaration",
+          "type": "global_declaration",
           "named": true
         },
         {
@@ -71,6 +60,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "use_directive",
@@ -92,6 +86,10 @@
     }
   },
   {
+    "type": "!",
+    "named": false
+  },
+  {
     "type": "*",
     "named": false
   },
@@ -101,6 +99,10 @@
   },
   {
     "type": "1",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
@@ -116,7 +118,7 @@
     "named": false
   },
   {
-    "type": "@threadlocal",
+    "type": "bool",
     "named": false
   },
   {
@@ -124,12 +126,44 @@
     "named": false
   },
   {
+    "type": "done",
+    "named": false
+  },
+  {
     "type": "export",
+    "named": false
+  },
+  {
+    "type": "f32",
+    "named": false
+  },
+  {
+    "type": "f64",
+    "named": false
+  },
+  {
+    "type": "i16",
+    "named": false
+  },
+  {
+    "type": "i32",
+    "named": false
+  },
+  {
+    "type": "i64",
+    "named": false
+  },
+  {
+    "type": "i8",
     "named": false
   },
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "int",
+    "named": false
   },
   {
     "type": "let",
@@ -140,7 +174,59 @@
     "named": true
   },
   {
+    "type": "never",
+    "named": false
+  },
+  {
+    "type": "opaque",
+    "named": false
+  },
+  {
+    "type": "rune",
+    "named": false
+  },
+  {
+    "type": "size",
+    "named": false
+  },
+  {
+    "type": "str",
+    "named": false
+  },
+  {
+    "type": "u16",
+    "named": false
+  },
+  {
+    "type": "u32",
+    "named": false
+  },
+  {
+    "type": "u64",
+    "named": false
+  },
+  {
+    "type": "u8",
+    "named": false
+  },
+  {
+    "type": "uint",
+    "named": false
+  },
+  {
+    "type": "uintptr",
+    "named": false
+  },
+  {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "valist",
+    "named": false
+  },
+  {
+    "type": "void",
     "named": false
   },
   {

@@ -35,7 +35,7 @@ module.exports = grammar({
       // §6.13 Units
       $.use_directive,
       // §6.12 Declarations
-      seq(optional('export'), $.declaration),
+      $._declaration,
       // $.static_assertion_expression,
     ),
 
@@ -44,6 +44,51 @@ module.exports = grammar({
     identifier: $ => token(sep1(name, '::')),
 
     name: $ => name,
+
+    // §6.6 Types
+
+    type: $ => seq(
+      optional('const'),
+      optional('!'),
+      $._storage_class,
+    ),
+
+    _storage_class: $ => choice(
+      $._primitive_type,
+      // $.pointer_type,
+      // $.struct_union_type,
+      // $.tuple_type,
+      // $.tagged_union_type,
+      // $.slice_array_type,
+      // $.function_type,
+      // $.alias_type,
+      // $.unwrapped_alias,
+    ),
+
+    _primitive_type: $ => choice(
+      'i8',
+      'i16',
+      'i32',
+      'i64',
+      'u8',
+      'u16',
+      'u32',
+      'u64',
+      'int',
+      'uint',
+      'size',
+      'uintptr',
+      'f32',
+      'f64',
+      'bool',
+      'done',
+      'never',
+      'opaque',
+      'rune',
+      'str',
+      'valist',
+      'void',
+    ),
 
     // §6.7 Expressions
 
@@ -61,11 +106,14 @@ module.exports = grammar({
 
     // §6.12 Declarations
 
-    declaration: $ => choice(
-      $.global_declaration,
-      // $.constant_declaration,
-      // $.type_declaration,
-      // $.function_declaration,
+    _declaration: $ => seq(
+      optional('export'),
+      choice(
+        $.global_declaration,
+        // $.constant_declaration,
+        // $.type_declaration,
+        // $.function_declaration,
+      ),
     ),
 
     global_declaration: $ => seq(
@@ -75,10 +123,10 @@ module.exports = grammar({
 
     global_binding: $ => seq(
       // optional($.decl_attr),
-      optional('@threadlocal'),
+      // optional('@threadlocal'),
       choice(
-        // seq($.identifier, ':', $.type),
-        // seq($.identifier, ':', $.type, '=', $.expression),
+        seq($.identifier, ':', $.type),
+        seq($.identifier, ':', $.type, '=', $.expression),
         seq($.identifier, '=', $._expression),
       ),
     ),
