@@ -24,13 +24,11 @@ use foo = bar::baz;
 
 (source_file
   (use_directive
-    (use_alias
-      (identifier)
-      (identifier)))
+    (identifier)
+    (identifier))
   (use_directive
-    (use_alias
-      (identifier)
-      (identifier))))
+    (identifier)
+    (identifier)))
 
 =======================
 Use directive with list
@@ -49,41 +47,33 @@ use foo::bar::{a,b,};
 
 (source_file
   (use_directive
-    (use_list
-      (identifier)
-      (name)))
+    (identifier)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)))
+    (identifier)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)
-      (name)))
+    (identifier)
+    (name)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)
-      (name)))
+    (identifier)
+    (name)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)))
+    (identifier)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)))
+    (identifier)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)
-      (name)))
+    (identifier)
+    (name)
+    (name))
   (use_directive
-    (use_list
-      (identifier)
-      (name)
-      (name))))
+    (identifier)
+    (name)
+    (name)))
 
 ===========================
 Use directive with wildcard
@@ -96,8 +86,6 @@ use foo::bar::*;
 
 (source_file
   (use_directive
-    (use_wildcard
-      (identifier)))
+      (identifier))
   (use_directive
-    (use_wildcard
-      (identifier))))
+      (identifier)))

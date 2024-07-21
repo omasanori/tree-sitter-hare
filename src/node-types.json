@@ -15,49 +15,7 @@
     }
   },
   {
-    "type": "use_alias",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "use_directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "use_alias",
-          "named": true
-        },
-        {
-          "type": "use_list",
-          "named": true
-        },
-        {
-          "type": "use_wildcard",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "use_list",
     "named": true,
     "fields": {},
     "children": {
@@ -70,21 +28,6 @@
         },
         {
           "type": "name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "use_wildcard",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
           "named": true
         }
       ]

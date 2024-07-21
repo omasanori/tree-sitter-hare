@@ -38,23 +38,15 @@ module.exports = grammar({
 
     use_directive: $ => seq(
       'use',
-      $._use_clause,
-    ),
-
-    _use_clause: $ => choice(
+      choice(
         $.identifier,
-        $.use_alias,
-        $.use_list,
-        $.use_wildcard,
+        // XXX: In the spec, it is seq($.name, '=', $.identifier). The rule
+        //      below accepts `use foo::bar = baz;` but it is harmless to us.
+        seq($.identifier, '=', $.identifier),
+        seq($.identifier, '::', '{', sep1o($.name, ','), '}'),
+        seq($.identifier, '::', '*'),
+      ),
     ),
-
-    // XXX: This rule should be seq($.name, '=', $.identifier) but it does not
-    //      work correctly. As a result, it accepts `use foo::bar = baz;`.
-    use_alias: $ => seq($.identifier, '=', $.identifier),
-
-    use_list: $ => seq($.identifier, '::', '{', sep1o($.name, ','), '}'),
-
-    use_wildcard: $ => seq($.identifier, '::', '*'),
 
     identifier: $ => token(sep1(name, '::')),
 
