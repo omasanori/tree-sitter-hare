@@ -1,5 +1,20 @@
 [
   {
+    "type": "decl_attr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression",
     "named": true,
     "fields": {},
@@ -26,6 +41,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "decl_attr",
+          "named": true
+        },
         {
           "type": "expression",
           "named": true
@@ -59,7 +78,17 @@
   {
     "type": "literal",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "pointer_type",
@@ -90,6 +119,40 @@
         },
         {
           "type": "use_directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "raw_string_section",
+          "named": true
+        },
+        {
+          "type": "string_section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
           "named": true
         }
       ]
@@ -134,6 +197,18 @@
     "named": false
   },
   {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": "*",
     "named": false
   },
@@ -158,6 +233,10 @@
     "named": false
   },
   {
+    "type": "@symbol",
+    "named": false
+  },
+  {
     "type": "@threadlocal",
     "named": false
   },
@@ -172,6 +251,10 @@
   {
     "type": "done",
     "named": false
+  },
+  {
+    "type": "escape_sequence",
+    "named": true
   },
   {
     "type": "export",
@@ -236,6 +319,10 @@
   {
     "type": "opaque",
     "named": false
+  },
+  {
+    "type": "raw_string_section",
+    "named": true
   },
   {
     "type": "rune",

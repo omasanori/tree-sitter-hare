@@ -124,7 +124,7 @@ module.exports = grammar({
       // $.integer_literal,
       // $.floating_literal,
       // $.rune_literal,
-      // $.string_literal,
+      $.string_literal,
       // $.array_literal,
       // $.struct_literal,
       // $.tuple_literal,
@@ -134,6 +134,27 @@ module.exports = grammar({
       'void',
       'done',
     ),
+
+    escape_sequence: $ => token.immediate(choice(
+      /\\[0abfnrtv\\'"]/,
+      // TODO: Implement others
+    )),
+
+    string_literal: $ => repeat1(choice(
+      $.string_section,
+      $.raw_string_section,
+    )),
+
+    string_section: $ => seq(
+      '"',
+      repeat(choice(
+        token.immediate(prec(1, /[^\\"]+/)),
+        $.escape_sequence,
+      )),
+      token.immediate('"'),
+    ),
+
+    raw_string_section: $ => /`[^`]*`/,
 
     // §6.12 Declarations
 
@@ -153,7 +174,7 @@ module.exports = grammar({
     ),
 
     global_binding: $ => seq(
-      // optional($.decl_attr),
+      optional($.decl_attr),
       optional('@threadlocal'),
       choice(
         seq($.identifier, ':', $.type),
@@ -161,6 +182,8 @@ module.exports = grammar({
         seq($.identifier, '=', $._expression),
       ),
     ),
+
+    decl_attr: $ => seq('@symbol', '(', $.string_literal, ')'),
 
     // §6.13 Units
 
