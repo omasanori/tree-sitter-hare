@@ -146,6 +146,51 @@
       "type": "CHOICE",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "_integer_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_floating_type"
+        },
+        {
+          "type": "STRING",
+          "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "done"
+        },
+        {
+          "type": "STRING",
+          "value": "never"
+        },
+        {
+          "type": "STRING",
+          "value": "opaque"
+        },
+        {
+          "type": "STRING",
+          "value": "rune"
+        },
+        {
+          "type": "STRING",
+          "value": "str"
+        },
+        {
+          "type": "STRING",
+          "value": "valist"
+        },
+        {
+          "type": "STRING",
+          "value": "void"
+        }
+      ]
+    },
+    "_integer_type": {
+      "type": "CHOICE",
+      "members": [
+        {
           "type": "STRING",
           "value": "i8"
         },
@@ -192,7 +237,12 @@
         {
           "type": "STRING",
           "value": "uintptr"
-        },
+        }
+      ]
+    },
+    "_floating_type": {
+      "type": "CHOICE",
+      "members": [
         {
           "type": "STRING",
           "value": "f32"
@@ -200,38 +250,6 @@
         {
           "type": "STRING",
           "value": "f64"
-        },
-        {
-          "type": "STRING",
-          "value": "bool"
-        },
-        {
-          "type": "STRING",
-          "value": "done"
-        },
-        {
-          "type": "STRING",
-          "value": "never"
-        },
-        {
-          "type": "STRING",
-          "value": "opaque"
-        },
-        {
-          "type": "STRING",
-          "value": "rune"
-        },
-        {
-          "type": "STRING",
-          "value": "str"
-        },
-        {
-          "type": "STRING",
-          "value": "valist"
-        },
-        {
-          "type": "STRING",
-          "value": "void"
         }
       ]
     },
@@ -272,6 +290,19 @@
     "expression": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_plain_expression"
+        }
+      ]
+    },
+    "_plain_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
         {
           "type": "SYMBOL",
           "name": "literal"
@@ -392,6 +423,18 @@
     "global_binding": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "@threadlocal"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "CHOICE",
           "members": [

@@ -64,6 +64,19 @@ module.exports = grammar({
     ),
 
     _primitive_type: $ => choice(
+      $._integer_type,
+      $._floating_type,
+      'bool',
+      'done',
+      'never',
+      'opaque',
+      'rune',
+      'str',
+      'valist',
+      'void',
+    ),
+
+    _integer_type: $ => choice(
       'i8',
       'i16',
       'i32',
@@ -76,16 +89,11 @@ module.exports = grammar({
       'uint',
       'size',
       'uintptr',
+    ),
+
+    _floating_type: $ => choice(
       'f32',
       'f64',
-      'bool',
-      'done',
-      'never',
-      'opaque',
-      'rune',
-      'str',
-      'valist',
-      'void',
     ),
 
     pointer_type: $ => seq(optional('nullable'), '*', $.type),
@@ -101,8 +109,13 @@ module.exports = grammar({
     ),
 
     expression: $ => choice(
-      $.literal,
+      $._plain_expression,
       // and others
+    ),
+
+    _plain_expression: $ => choice(
+      $.identifier,
+      $.literal,
     ),
 
     literal: $ => choice(
@@ -139,7 +152,7 @@ module.exports = grammar({
 
     global_binding: $ => seq(
       // optional($.decl_attr),
-      // optional('@threadlocal'),
+      optional('@threadlocal'),
       choice(
         seq($.identifier, ':', $.type),
         seq($.identifier, ':', $.type, '=', $.expression),

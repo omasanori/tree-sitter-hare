@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "literal",
           "named": true
         }
@@ -151,6 +155,10 @@
   },
   {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "@threadlocal",
     "named": false
   },
   {
