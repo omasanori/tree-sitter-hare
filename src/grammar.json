@@ -1,5 +1,6 @@
 {
   "name": "hare",
+  "word": "name",
   "rules": {
     "source_file": {
       "type": "SEQ",

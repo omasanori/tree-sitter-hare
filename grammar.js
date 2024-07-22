@@ -14,6 +14,8 @@ const name = /[a-zA-Z_][0-9a-zA-Z_]*/;
 module.exports = grammar({
   name: 'hare',
 
+  word: $ => $.name,
+
   rules: {
 
     // NOTE: This parser permits use directives after declarations on purpose.
