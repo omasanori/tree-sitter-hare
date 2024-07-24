@@ -107,6 +107,10 @@
           "named": true
         },
         {
+          "type": "rune_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         }
@@ -123,6 +127,21 @@
       "types": [
         {
           "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rune_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
           "named": true
         }
       ]
@@ -221,6 +240,10 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "'",
     "named": false
   },
   {

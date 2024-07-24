@@ -143,7 +143,7 @@ module.exports = grammar({
     literal: $ => choice(
       $.integer_literal,
       $.floating_literal,
-      // $.rune_literal,
+      $.rune_literal,
       $.string_literal,
       // $.array_literal,
       // $.struct_literal,
@@ -159,7 +159,11 @@ module.exports = grammar({
       seq('0x', hex_digits, optional(integer_suffix)),
       seq('0o', octal_digits, optional(integer_suffix)),
       seq('0b', binary_digits, optional(integer_suffix)),
-      seq(nonzero_decimal_digits, optional(positive_decimal_exponent), optional(integer_suffix)),
+      seq(
+        nonzero_decimal_digits,
+        optional(positive_decimal_exponent),
+        optional(integer_suffix),
+      ),
     )),
 
     floating_literal: $ => token(choice(
@@ -170,16 +174,41 @@ module.exports = grammar({
         optional(decimal_exponent),
         optional(floating_suffix),
       ),
-      seq(nonzero_decimal_digits, optional(decimal_exponent), floating_suffix),
-      seq('0x', hex_digits, '.', hex_digits, binary_exponent, optional(floating_suffix)),
-      seq('0x', hex_digits, binary_exponent, optional(floating_suffix)),
+      seq(
+        nonzero_decimal_digits,
+        optional(decimal_exponent),
+        floating_suffix,
+      ),
+      seq(
+        '0x',
+        hex_digits,
+        '.',
+        hex_digits,
+        binary_exponent,
+        optional(floating_suffix),
+      ),
+      seq(
+        '0x',
+        hex_digits,
+        binary_exponent,
+        optional(floating_suffix),
+      ),
     )),
+
+    rune_literal: $ => seq(
+      "'",
+      choice(
+        token.immediate(/[^\']/),
+        $.escape_sequence,
+      ),
+      "'",
+    ),
 
     escape_sequence: $ => token.immediate(choice(
       /\\[0abfnrtv\\'"]/,
-      /\\x[0-9A-Fa-f][0-9A-Fa-f]/,
-      /\\u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]/,
-      /\\U[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]/,
+      /\\x[0-9A-Fa-f]{2}/,
+      /\\u[0-9A-Fa-f]{4}/,
+      /\\U[0-9A-Fa-f]{8}/,
     )),
 
     string_literal: $ => repeat1(choice(
