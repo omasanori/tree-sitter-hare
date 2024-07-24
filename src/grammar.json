@@ -61,9 +61,25 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_declaration"
+          "name": "declaration"
         }
       ]
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "//"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\\n]*"
+          }
+        ]
+      }
     },
     "identifier": {
       "type": "TOKEN",
@@ -410,7 +426,7 @@
       "type": "PATTERN",
       "value": "`[^`]*`"
     },
-    "_declaration": {
+    "declaration": {
       "type": "SEQ",
       "members": [
         {
@@ -729,7 +745,11 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": " |\\t|\\n"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],

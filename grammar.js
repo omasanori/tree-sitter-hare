@@ -16,6 +16,11 @@ module.exports = grammar({
 
   word: $ => $.name,
 
+  extras: $ => [
+    / |\t|\n/,
+    $.comment,
+  ],
+
   rules: {
 
     // NOTE: This parser permits use directives after declarations on purpose.
@@ -35,9 +40,13 @@ module.exports = grammar({
 
     _import_or_declaration: $ => choice(
       $.use_directive,               // §6.13 Units
-      $._declaration,                // §6.12 Declarations
+      $.declaration,                 // §6.12 Declarations
       // $.static_assertion_expression, // §6.7.21 Assertions
     ),
+
+    // §6.2 Lexical analysis
+
+    comment: $ => token(seq('//', /[^\n]*/)),
 
     // §6.5 Identifiers
 
@@ -158,7 +167,7 @@ module.exports = grammar({
 
     // §6.12 Declarations
 
-    _declaration: $ => seq(
+    declaration: $ => seq(
       optional('export'),
       choice(
         $.global_declaration,
