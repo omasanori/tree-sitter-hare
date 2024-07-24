@@ -27,8 +27,11 @@ module.exports = grammar({
 
   word: $ => $.name,
 
+  // NOTE: In the spec, only U+0009, U+000A and U+0020 are treated as white-
+  // space characters. This parser accepts other white-space characters too.
+
   extras: $ => [
-    / |\t|\n/,
+    /\s/,
     $.comment,
   ],
 
