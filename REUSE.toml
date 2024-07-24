@@ -23,3 +23,10 @@ path = ["package.json"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2024 Masanori Ogino"
 SPDX-License-Identifier = "MIT"
+
+# Test corpus
+[[annotations]]
+path = ["test/corpus/*.txt"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2024 Masanori Ogino"
+SPDX-License-Identifier = "MIT"
