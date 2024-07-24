@@ -10,6 +10,14 @@ const sep = (rule, s) => optional(sep1(rule, s));
 const sep1 = (rule, s) => seq(rule, repeat(seq(s, rule)));
 
 const name = /[a-zA-Z_][0-9a-zA-Z_]*/;
+const decimal_digits_without_separators = /[0-9]+/;
+const decimal_digits = /[0-9]([0-9]|_[0-9])*/;
+const nonzero_decimal_digits = /0|([1-9]([0-9]|_[0-9])*)/;
+const hex_digits = /[0-9A-Fa-f]([0-9A-Fa-f]|_[0-9A-Fa-f])*/;
+const octal_digits = /[0-7]([0-7]|_[0-7])*/;
+const binary_digits = /[01]([01]|_[01])*/;
+const positive_decimal_exponent = /[Ee]\+?[0-9]+/;
+const integer_suffix = /(i|u|z|i8|i16|i32|i64|u8|u16|u32|u64)/;
 
 module.exports = grammar({
   name: 'hare',
@@ -130,7 +138,7 @@ module.exports = grammar({
     ),
 
     literal: $ => choice(
-      // $.integer_literal,
+      $.integer_literal,
       // $.floating_literal,
       // $.rune_literal,
       $.string_literal,
@@ -144,9 +152,22 @@ module.exports = grammar({
       'done',
     ),
 
+    integer_literal: $ => token(choice(
+      seq('0x', hex_digits, optional(integer_suffix)),
+      seq('0o', octal_digits, optional(integer_suffix)),
+      seq('0b', binary_digits, optional(integer_suffix)),
+      seq(
+        nonzero_decimal_digits,
+        optional(positive_decimal_exponent),
+        optional(integer_suffix)
+      ),
+    )),
+
     escape_sequence: $ => token.immediate(choice(
       /\\[0abfnrtv\\'"]/,
-      // TODO: Implement others
+      /\\x[0-9A-Fa-f][0-9A-Fa-f]/,
+      /\\u[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]/,
+      /\\U[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]/,
     )),
 
     string_literal: $ => repeat1(choice(

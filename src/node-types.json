@@ -99,6 +99,10 @@
       "required": false,
       "types": [
         {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         }
@@ -314,6 +318,10 @@
   {
     "type": "int",
     "named": false
+  },
+  {
+    "type": "integer_literal",
+    "named": true
   },
   {
     "type": "let",
