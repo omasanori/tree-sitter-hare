@@ -201,7 +201,7 @@ module.exports = grammar({
         token.immediate(/[^\']/),
         $.escape_sequence,
       ),
-      "'",
+      token.immediate("'"),
     ),
 
     escape_sequence: $ => token.immediate(choice(
@@ -219,7 +219,7 @@ module.exports = grammar({
     string_section: $ => seq(
       '"',
       repeat(choice(
-        token.immediate(/[^\\"]*/),
+        token.immediate(/[^\\"]+/),
         $.escape_sequence,
       )),
       token.immediate('"'),
