@@ -99,6 +99,10 @@
       "required": false,
       "types": [
         {
+          "type": "floating_literal",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -294,6 +298,10 @@
   {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "floating_literal",
+    "named": true
   },
   {
     "type": "i16",

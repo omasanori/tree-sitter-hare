@@ -16,8 +16,11 @@ const nonzero_decimal_digits = /0|([1-9]([0-9]|_[0-9])*)/;
 const hex_digits = /[0-9A-Fa-f]([0-9A-Fa-f]|_[0-9A-Fa-f])*/;
 const octal_digits = /[0-7]([0-7]|_[0-7])*/;
 const binary_digits = /[01]([01]|_[01])*/;
+const decimal_exponent = /[Ee][+-]?[0-9]+/;
 const positive_decimal_exponent = /[Ee]\+?[0-9]+/;
+const binary_exponent = /[Pp][+-]?[0-9]+/;
 const integer_suffix = /i|u|z|i8|i16|i32|i64|u8|u16|u32|u64/;
+const floating_suffix = /f32|f64/;
 
 module.exports = grammar({
   name: 'hare',
@@ -139,7 +142,7 @@ module.exports = grammar({
 
     literal: $ => choice(
       $.integer_literal,
-      // $.floating_literal,
+      $.floating_literal,
       // $.rune_literal,
       $.string_literal,
       // $.array_literal,
@@ -156,11 +159,20 @@ module.exports = grammar({
       seq('0x', hex_digits, optional(integer_suffix)),
       seq('0o', octal_digits, optional(integer_suffix)),
       seq('0b', binary_digits, optional(integer_suffix)),
+      seq(nonzero_decimal_digits, optional(positive_decimal_exponent), optional(integer_suffix)),
+    )),
+
+    floating_literal: $ => token(choice(
       seq(
         nonzero_decimal_digits,
-        optional(positive_decimal_exponent),
-        optional(integer_suffix)
+        '.',
+        decimal_digits,
+        optional(decimal_exponent),
+        optional(floating_suffix),
       ),
+      seq(nonzero_decimal_digits, optional(decimal_exponent), floating_suffix),
+      seq('0x', hex_digits, '.', hex_digits, binary_exponent, optional(floating_suffix)),
+      seq('0x', hex_digits, binary_exponent, optional(floating_suffix)),
     )),
 
     escape_sequence: $ => token.immediate(choice(
