@@ -1,0 +1,39 @@
+===============
+Primitive types
+===============
+
+let i: int, f: f32, b: bool, d: done, n: never, c: rune, s: str, v: valist,
+    o: void;
+
+---
+
+(source_file
+  (declaration
+    (global_declaration
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type))
+      (global_binding
+        (identifier)
+        (type)))))
