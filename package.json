@@ -35,7 +35,7 @@
   "license": "MIT",
   "homepage": "https://git.sr.ht/~omasanori/tree-sitter-hare",
   "devDependencies": {
-    "eslint": "^9.9.0",
+    "eslint": "^9.9.1",
     "eslint-config-google": "^0.14.0",
     "prebuildify": "^6.0.1",
     "tree-sitter-cli": "^0.22.6"
